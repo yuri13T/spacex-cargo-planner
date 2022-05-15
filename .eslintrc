@@ -33,6 +33,7 @@
       {
         "patterns": ["@mui/*/*/*", "!@mui/material/test-utils/*"]
       }
-    ]
+    ],
+    "no-unused-vars": "warn"
   }
 }
