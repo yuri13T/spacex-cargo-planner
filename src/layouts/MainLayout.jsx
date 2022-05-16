@@ -18,8 +18,7 @@ export default function MainLayout({ children }) {
         <Box component="main" sx={{ flexGrow: 1, p: 3, pt: 0 }}>
           <Box
             sx={(theme) => ({
-              background:
-                'linear-gradient(124.01deg, #2D3038 0%, rgba(45, 48, 56, 0) 100%)',
+              background: theme.palette.background.main,
               borderRadius: '30px',
               height: '100%',
               py: 4,

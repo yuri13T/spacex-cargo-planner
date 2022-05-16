@@ -1,7 +1,17 @@
 import React from 'react';
-import { Box, Toolbar, Drawer } from '@mui/material';
+import {
+  Box,
+  Toolbar,
+  Drawer,
+  Typography,
+  Stack,
+  MenuList,
+  MenuItem,
+} from '@mui/material';
 
 const drawerWidth = 336;
+
+const mockData = ['Amazon', 'American Express', 'Airbnb', 'Apple'];
 
 export default function AppDrawer({ isDrawerOpen, onDrawerToggle }) {
   const drawer = (
@@ -30,7 +40,41 @@ export default function AppDrawer({ isDrawerOpen, onDrawerToggle }) {
           },
         })}
       >
-        Drawer
+        <Typography
+          variant="h6"
+          sx={{ textTransform: 'uppercase', mb: 2 }}
+          color="secondary"
+        >
+          shipment list
+        </Typography>
+        <MenuList>
+          <Stack spacing={1.25}>
+            {mockData.map((item, index) => (
+              <MenuItem
+                key={item}
+                selected={index === 0}
+                sx={(theme) => ({
+                  pl: 0,
+                  borderRadius: '10px',
+                  '&.Mui-selected': {
+                    background: theme.palette.background.selected,
+                    '& .MuiTypography-root': {
+                      color: theme.palette.common.white,
+                    },
+                  },
+                  '&:hover': {
+                    background: theme.palette.background.selected,
+                    '& .MuiTypography-root': {
+                      color: theme.palette.common.white,
+                    },
+                  },
+                })}
+              >
+                <Typography color="secondary">{item}</Typography>
+              </MenuItem>
+            ))}
+          </Stack>
+        </MenuList>
       </Box>
     </>
   );

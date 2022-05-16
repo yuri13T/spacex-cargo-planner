@@ -1,30 +1,31 @@
 import { createTheme } from '@mui/material/styles';
-// import { purple } from '@mui/material/colors';
+import LatoWoff2 from '../assets/fonts/lato-v23-latin/lato-v23-latin-regular.woff2';
+import LatoWoff from '../assets/fonts/lato-v23-latin/lato-v23-latin-regular.woff';
 
 const theme = createTheme();
 
 export default function getTheme() {
   const { white } = theme.palette.common;
-  // const { fontWeightBold, fontWeightMedium } = theme.typography;
 
   return {
     ...theme,
     // direction,
     components: {
       MuiCssBaseline: {
-        styleOverrides: {
-          body: {
-            background: '#1B1D22',
-          },
-        },
+        styleOverrides: `
+          @font-face {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 400;
+            src: local(''),
+                 url(${LatoWoff2}) format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+                 url(${LatoWoff}) format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+          }
+          body {
+            background: #1B1D22;
+          }
+        `,
       },
-      // MuiButtonBase: {
-      //   styleOverrides: {
-      //     root: {
-      //       display: 'flex !important',
-      //     },
-      //   },
-      // },
       MuiOutlinedInput: {
         styleOverrides: {
           root: {
@@ -56,34 +57,20 @@ export default function getTheme() {
           },
         },
       },
-      // MuiInputBase: {
-      //   defaultProps: {},
-      //   styleOverrides: {},
-      // },
     },
     typography: {
       ...theme.typography,
-      // fontFamily: '',
+      fontFamily: ['Roboto', 'Helvetica', 'Arial', 'Lato', 'sans-serif'].join(','),
       // fontSize: 16,
       // h1: {},
-      // h2: {
-      //   fontWeight: fontWeightBold,
-      // },
-      // h3: {
-      //   fontWeight: fontWeightBold,
-      // },
-      // h4: {
-      //   fontWeight: fontWeightBold,
-      // },
-      // h5: {
-      //   fontWeight: fontWeightBold,
-      // },
-      // h6: {
-      //   fontWeight: fontWeightBold,
-      // },
-      // subtitle1: {
-      //   fontWeight: fontWeightMedium,
-      // },
+      // h2: {},
+      // h3: {},
+      // h4: {},
+      // h5: {},
+      h6: {
+        fontFamily: 'Lato, Roboto, "sans-serif"',
+      },
+      // subtitle1: {},
       // subtitle2: {},
       // body1: {},
       // body2: {},
@@ -99,16 +86,18 @@ export default function getTheme() {
       // mode: 'dark',
       background: {
         paper: '#1B1D22',
+        main: 'linear-gradient(124.01deg, #2D3038 0%, rgba(45, 48, 56, 0) 100%)',
+        selected: 'linear-gradient(90deg, rgba(45, 48, 56, 0) 22.92%, #2D3038 100%)',
       },
       primary: {
         main: '#1B1D22',
       },
-      // secondary: {
-      //   main: '#979797',
-      // },
+      secondary: {
+        main: '#979797',
+      },
       text: {
         primary: '#fff',
-        secondary: '#979797',
+        // secondary: '#979797',
       },
       action: {
         active: '#000',

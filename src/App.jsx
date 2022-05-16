@@ -17,7 +17,7 @@ import MainLayout from './layouts/MainLayout';
 const theme = responsiveFontSizes(createTheme(getTheme()));
 
 function App() {
-  // console.log('theme', theme);
+  console.log('theme', theme);
   return (
     <Suspense fallback={<Loading height="100vh" />}>
       <StyledEngineProvider injectFirst>
