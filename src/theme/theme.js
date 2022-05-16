@@ -38,6 +38,7 @@ export default function getTheme() {
             '@media(max-width: 695px)': {
               minWidth: '100%',
             },
+            padding: '9px',
             [theme.breakpoints.down('sm')]: {
               paddingTop: '10px !important',
               paddingBottom: '10px !important',
@@ -63,9 +64,16 @@ export default function getTheme() {
       fontFamily: ['Roboto', 'Helvetica', 'Arial', 'Lato', 'sans-serif'].join(','),
       // fontSize: 16,
       // h1: {},
-      // h2: {},
-      // h3: {},
-      // h4: {},
+      h2: {
+        fontSize: '64px',
+        fontWeight: 400,
+      },
+      h3: {
+        fontSize: '56px',
+      },
+      h4: {
+        // fontSize: '34px',
+      },
       // h5: {},
       h6: {
         fontFamily: 'Lato, Roboto, "sans-serif"',
