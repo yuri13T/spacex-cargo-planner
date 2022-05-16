@@ -8,12 +8,13 @@ import {
   MenuList,
   MenuItem,
 } from '@mui/material';
+import { useShipmentsContext } from '../../context/shipments-context';
 
 const drawerWidth = 336;
 
-const mockData = ['Amazon', 'American Express', 'Airbnb', 'Apple'];
-
 export default function AppDrawer({ isDrawerOpen, onDrawerToggle }) {
+  const { /* loaded, error, */ data: shipments } = useShipmentsContext();
+  // console.log('shipments', shipments);
   const drawer = (
     <>
       <Toolbar
@@ -29,13 +30,15 @@ export default function AppDrawer({ isDrawerOpen, onDrawerToggle }) {
       />
       <Box
         sx={(theme) => ({
-          p: 3,
+          px: 3,
           pt: 2,
+          pb: 0,
+          mb: 3,
           flexGrow: 1,
+          overflowY: 'auto',
           [theme.breakpoints.up('sm')]: {
             pt: 0,
             pr: 3,
-            pb: 4,
             pl: 5,
           },
         })}
@@ -45,34 +48,35 @@ export default function AppDrawer({ isDrawerOpen, onDrawerToggle }) {
           sx={{ textTransform: 'uppercase', mb: 2 }}
           color="secondary"
         >
-          shipment list
+          Shipment list
         </Typography>
         <MenuList>
           <Stack spacing={1.25}>
-            {mockData.map((item, index) => (
-              <MenuItem
-                key={item}
-                selected={index === 0}
-                sx={(theme) => ({
-                  pl: 0,
-                  borderRadius: '10px',
-                  '&.Mui-selected': {
-                    background: theme.palette.background.selected,
-                    '& .MuiTypography-root': {
-                      color: theme.palette.common.white,
+            {shipments &&
+              shipments.map(({ id, name }) => (
+                <MenuItem
+                  key={id}
+                  // selected={index === 0}
+                  sx={(theme) => ({
+                    pl: 0,
+                    borderRadius: '10px',
+                    '&.Mui-selected': {
+                      background: theme.palette.background.selected,
+                      '& .MuiTypography-root': {
+                        color: theme.palette.common.white,
+                      },
                     },
-                  },
-                  '&:hover': {
-                    background: theme.palette.background.selected,
-                    '& .MuiTypography-root': {
-                      color: theme.palette.common.white,
+                    '&:hover': {
+                      background: theme.palette.background.selected,
+                      '& .MuiTypography-root': {
+                        color: theme.palette.common.white,
+                      },
                     },
-                  },
-                })}
-              >
-                <Typography color="secondary">{item}</Typography>
-              </MenuItem>
-            ))}
+                  })}
+                >
+                  <Typography color="secondary">{name}</Typography>
+                </MenuItem>
+              ))}
           </Stack>
         </MenuList>
       </Box>
@@ -101,6 +105,7 @@ export default function AppDrawer({ isDrawerOpen, onDrawerToggle }) {
             boxSizing: 'border-box',
             width: drawerWidth,
             borderRight: 'none',
+            overflowY: 'unset',
             '@media(max-width: 375px)': {
               width: '100%',
             },
@@ -117,6 +122,7 @@ export default function AppDrawer({ isDrawerOpen, onDrawerToggle }) {
             boxSizing: 'border-box',
             width: drawerWidth,
             borderRight: 'none',
+            overflowY: 'unset',
           },
         }}
         open

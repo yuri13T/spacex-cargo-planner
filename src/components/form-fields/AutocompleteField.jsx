@@ -22,6 +22,15 @@ const AutocompleteField = React.forwardRef((props, ref) => (
           ),
         }}
         placeholder="Search"
+        sx={{
+          width: '320px',
+          '@media(max-width: 695px)': {
+            minWidth: '100%',
+          },
+          '@media(max-width: 375px)': {
+            width: '100%',
+          },
+        }}
       />
     )}
   />

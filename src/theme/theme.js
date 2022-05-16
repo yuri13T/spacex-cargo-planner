@@ -26,6 +26,16 @@ export default function getTheme() {
           }
         `,
       },
+      MuiFormControl: {
+        styleOverrides: {
+          root: {
+            minWidth: '320px',
+            '@media(max-width: 695px)': {
+              minWidth: '100%',
+            },
+          },
+        },
+      },
       MuiOutlinedInput: {
         styleOverrides: {
           root: {
@@ -34,17 +44,10 @@ export default function getTheme() {
             paddingRight: `${theme.spacing(2)} !important`,
             borderRadius: '10px',
             transition: theme.transitions.create('width'),
-            width: '320px',
-            '@media(max-width: 695px)': {
-              minWidth: '100%',
-            },
             padding: '9px',
             [theme.breakpoints.down('sm')]: {
               paddingTop: '10px !important',
               paddingBottom: '10px !important',
-            },
-            '@media(max-width: 280px)': {
-              width: '100%',
             },
           },
           input: {
