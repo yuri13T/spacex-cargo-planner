@@ -1,20 +1,22 @@
 import React from 'react';
-import {
-  Box,
-  Toolbar,
-  Drawer,
-  Typography,
-  Stack,
-  MenuList,
-  MenuItem,
-} from '@mui/material';
-import { useShipmentsContext } from '../../context/shipments-context';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Drawer from '@mui/material/Drawer';
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
+import MenuList from '@mui/material/MenuList';
+import MenuItem from '@mui/material/MenuItem';
+import Link from '@mui/material/Link';
+import { useRoutesContext } from '../../context/routes-context';
 
 const drawerWidth = 336;
 
 export default function AppDrawer({ isDrawerOpen, onDrawerToggle }) {
-  const { /* loaded, error, */ data: shipments } = useShipmentsContext();
-  // console.log('shipments', shipments);
+  const location = useLocation();
+
+  const routes = useRoutesContext();
+
   const drawer = (
     <>
       <Toolbar
@@ -52,11 +54,10 @@ export default function AppDrawer({ isDrawerOpen, onDrawerToggle }) {
         </Typography>
         <MenuList>
           <Stack spacing={1.25}>
-            {shipments &&
-              shipments.map(({ id, name }) => (
+            {routes.map(({ id, name, path }) => (
+              <Link key={id + name} component={RouterLink} to={path} underline="none">
                 <MenuItem
-                  key={id}
-                  // selected={index === 0}
+                  selected={location.pathname === path}
                   sx={(theme) => ({
                     pl: 0,
                     borderRadius: '10px',
@@ -76,7 +77,8 @@ export default function AppDrawer({ isDrawerOpen, onDrawerToggle }) {
                 >
                   <Typography color="secondary">{name}</Typography>
                 </MenuItem>
-              ))}
+              </Link>
+            ))}
           </Stack>
         </MenuList>
       </Box>

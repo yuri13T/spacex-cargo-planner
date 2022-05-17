@@ -12,8 +12,8 @@ import {
 import { CssBaseline } from '@mui/material';
 import Loading from './components/common/Loading';
 import getTheme from './theme/theme';
-import MainLayout from './layouts/MainLayout';
-import Shipment from './components/shipment';
+import ShipmentsProvider from './context/shipments-context';
+import RoutesProvider from './context/routes-context';
 
 const theme = responsiveFontSizes(createTheme(getTheme()));
 
@@ -24,9 +24,9 @@ function App() {
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <MainLayout>
-            <Shipment />
-          </MainLayout>
+          <ShipmentsProvider>
+            <RoutesProvider />
+          </ShipmentsProvider>
         </ThemeProvider>
       </StyledEngineProvider>
     </Suspense>

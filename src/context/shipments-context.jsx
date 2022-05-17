@@ -1,6 +1,6 @@
 import React from 'react';
 import { createCtx } from './helpers';
-import useAxios from '../hooks/useAxios';
+import useAxios from '../containers/hooks/useAxios';
 
 const [useShipmentsContext, ShipmentsContextProvider] = createCtx();
 
