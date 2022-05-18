@@ -17,7 +17,7 @@ const drawerWidth = 336;
 export default function AppDrawer({ isDrawerOpen, onDrawerToggle }) {
   const location = useLocation();
 
-  const routes = useRoutesContext();
+  const { routes } = useRoutesContext();
 
   const drawer = (
     <>

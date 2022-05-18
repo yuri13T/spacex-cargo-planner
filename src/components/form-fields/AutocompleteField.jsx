@@ -1,19 +1,24 @@
 import React from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { Autocomplete, Link, TextField } from '@mui/material';
-// import SearchIcon from '@mui/icons-material/Search';
+import {
+  Autocomplete,
+  Link,
+  TextField,
+  InputAdornment,
+  CircularProgress,
+} from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 import { getRouteByName } from '../../context/routes-context';
 
 const AutocompleteField = React.forwardRef((props, ref) => {
-  const { options = [] } = props;
+  const { loading, options = [] } = props;
   const navigate = useNavigate();
 
   return (
     <Autocomplete
-      /* eslint-disable-next-line react/jsx-props-no-spreading */
-      {...props}
       ref={ref}
       id="cargo-planner-search"
+      loading={loading}
       options={options}
       getOptionLabel={(option) => option.name}
       onKeyDown={(event) => {
@@ -50,14 +55,20 @@ const AutocompleteField = React.forwardRef((props, ref) => {
         <TextField
           /* eslint-disable-next-line react/jsx-props-no-spreading */
           {...params}
-          // TODO: Find out why this didn't work properly in the Autocomplete.
-          // InputProps={{
-          //   startAdornment: (
-          //     <InputAdornment position="start">
-          //       <SearchIcon />
-          //     </InputAdornment>
-          //   ),
-          // }}
+          InputProps={{
+            ...params.InputProps,
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+            endAdornment: (
+              <InputAdornment position="end">
+                {loading ? <CircularProgress size={24} /> : null}
+                {params.InputProps.endAdornment}
+              </InputAdornment>
+            ),
+          }}
           placeholder="Search"
           sx={{
             width: '320px',

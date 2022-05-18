@@ -7,7 +7,8 @@ import { ReactComponent as Logo } from '../../assets/icons/logo.svg';
 import { useRoutesContext } from '../../context/routes-context';
 
 export default function Header({ isDrawerOpen, onDrawerToggle }) {
-  const routes = useRoutesContext();
+  const { loaded, routes } = useRoutesContext();
+
   return (
     <AppBar
       position="static"
@@ -60,9 +61,9 @@ export default function Header({ isDrawerOpen, onDrawerToggle }) {
               },
             }}
           >
-            <AutocompleteField options={routes} />
+            <AutocompleteField loading={!loaded} options={routes} />
             {/* <Fade in={!isDrawerOpen}> */}
-            {/*  <AutocompleteField options={routes} /> */}
+            {/*  <AutocompleteField loading={!loaded} options={routes} /> */}
             {/* </Fade> */}
           </Grid>
           <Grid

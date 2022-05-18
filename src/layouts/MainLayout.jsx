@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
-// TODO: Find out info about this issue import/no-cycle and fix it.
 import Header from '../components/header/Header';
 import AppDrawer from '../components/drawer/Drawer';
 
 export default function MainLayout() {
+  const location = useLocation();
+
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -35,6 +36,8 @@ export default function MainLayout() {
             })}
           >
             <Outlet />
+            {/* We don't have the index route, so I've temporarily added this code */}
+            {location.pathname === '/' && <Navigate to="/walmart" replace />}
           </Box>
         </Box>
       </Box>

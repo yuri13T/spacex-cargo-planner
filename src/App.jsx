@@ -9,23 +9,23 @@ import { CssBaseline } from '@mui/material';
 import Loading from './components/common/Loading';
 import getTheme from './theme/theme';
 import ShipmentsProvider from './context/shipments-context';
-import RoutesProvider from './context/routes-context';
+import RoutesContainer from './containers/RoutesContainer';
 
 const theme = responsiveFontSizes(createTheme(getTheme()));
 
 function App() {
   // console.log('theme', theme);
   return (
-    <Suspense fallback={<Loading height="100vh" />}>
-      <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Suspense fallback={<Loading height="100vh" />}>
           <ShipmentsProvider>
-            <RoutesProvider />
+            <RoutesContainer />
           </ShipmentsProvider>
-        </ThemeProvider>
-      </StyledEngineProvider>
-    </Suspense>
+        </Suspense>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 }
 

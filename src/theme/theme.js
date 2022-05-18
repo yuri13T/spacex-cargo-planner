@@ -61,6 +61,21 @@ export default function getTheme() {
           },
         },
       },
+      MuiAutocomplete: {
+        styleOverrides: {
+          loading: {
+            color: theme.palette.common.white,
+          },
+          noOptions: {
+            color: theme.palette.common.white,
+          },
+          endAdornment: {
+            position: 'relative',
+            right: 'unset !important',
+            top: 'unset',
+          },
+        },
+      },
     },
     typography: {
       ...theme.typography,

@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Stack, Typography, TextField } from '@mui/material';
-// TODO: Find out info about this issue import/no-cycle and fix it.
-import { useRoutesContext, getRouteByPath } from '../../context/routes-context';
+import { Stack, Typography, TextField, Skeleton } from '@mui/material';
+import { getRouteByPath, useRoutesContext } from '../../context/routes-context';
 
 const getCargoBays = (value) => {
   if (!value) {
@@ -21,7 +20,7 @@ const getCargoBays = (value) => {
 export default function Shipment() {
   const location = useLocation();
 
-  const routes = useRoutesContext();
+  const { loaded, routes } = useRoutesContext();
 
   const selectedShipment = useMemo(
     () => getRouteByPath(routes, location.pathname),
@@ -48,8 +47,12 @@ export default function Shipment() {
     <section>
       <Stack spacing={3.75}>
         <div>
-          <Typography variant="h2">{selectedShipment.name}</Typography>
-          <Typography color="secondary">{selectedShipment.email}</Typography>
+          <Typography variant="h2">
+            {!loaded ? <Skeleton width="70%" /> : selectedShipment?.name}
+          </Typography>
+          <Typography color="secondary">
+            {!loaded ? <Skeleton width="35%" /> : selectedShipment?.email}
+          </Typography>
         </div>
         <div>
           <Typography color="secondary" sx={{ textTransform: 'uppercase', mb: 1.25 }}>
@@ -61,7 +64,9 @@ export default function Shipment() {
           <Typography variant="h4" color="secondary">
             Number of required cargo bays
           </Typography>
-          <Typography variant="h3">{cargoBays}</Typography>
+          <Typography variant="h3">
+            {!loaded ? <Skeleton width="5%" /> : cargoBays}
+          </Typography>
         </div>
       </Stack>
     </section>

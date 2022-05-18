@@ -14,7 +14,10 @@ function Loading({ height = '100%', size = 40 }) {
         flexGrow: 1,
       }}
     >
-      <CircularProgress size={size} />
+      <CircularProgress
+        size={size}
+        sx={(theme) => ({ color: theme.palette.common.white })}
+      />
     </Box>
   );
 }
