@@ -9,6 +9,7 @@ import {
   MenuList,
   MenuItem,
   Link,
+  Skeleton,
 } from '@mui/material';
 import { useRoutesContext } from '../../context/routes-context';
 
@@ -17,7 +18,42 @@ const drawerWidth = 336;
 export default function AppDrawer({ isDrawerOpen, onDrawerToggle }) {
   const location = useLocation();
 
-  const { routes } = useRoutesContext();
+  const { loaded, routes } = useRoutesContext();
+
+  const renderLinkMenuItem = (list) =>
+    list.map(({ id, name, path }) => (
+      <Link
+        key={id + name}
+        component={RouterLink}
+        to={path}
+        underline="none"
+        sx={{ pointerEvents: !loaded ? 'none' : 'auto' }}
+      >
+        <MenuItem
+          selected={location.pathname === path}
+          sx={(theme) => ({
+            pl: 0,
+            borderRadius: '10px',
+            '&.Mui-selected': {
+              background: theme.palette.background.selected,
+              '& .MuiTypography-root': {
+                color: theme.palette.common.white,
+              },
+            },
+            '&:hover': {
+              background: theme.palette.background.selected,
+              '& .MuiTypography-root': {
+                color: theme.palette.common.white,
+              },
+            },
+          })}
+        >
+          <Typography color="secondary" sx={{ width: '100%' }}>
+            {!loaded ? <Skeleton /> : name}
+          </Typography>
+        </MenuItem>
+      </Link>
+    ));
 
   const drawer = (
     <>
@@ -56,31 +92,15 @@ export default function AppDrawer({ isDrawerOpen, onDrawerToggle }) {
         </Typography>
         <MenuList>
           <Stack spacing={1.25}>
-            {routes.map(({ id, name, path }) => (
-              <Link key={id + name} component={RouterLink} to={path} underline="none">
-                <MenuItem
-                  selected={location.pathname === path}
-                  sx={(theme) => ({
-                    pl: 0,
-                    borderRadius: '10px',
-                    '&.Mui-selected': {
-                      background: theme.palette.background.selected,
-                      '& .MuiTypography-root': {
-                        color: theme.palette.common.white,
-                      },
-                    },
-                    '&:hover': {
-                      background: theme.palette.background.selected,
-                      '& .MuiTypography-root': {
-                        color: theme.palette.common.white,
-                      },
-                    },
-                  })}
-                >
-                  <Typography color="secondary">{name}</Typography>
-                </MenuItem>
-              </Link>
-            ))}
+            {!loaded
+              ? renderLinkMenuItem(
+                  Array.from(new Array(10), (v, i) => ({
+                    id: i + 1,
+                    name: '',
+                    path: '',
+                  }))
+                )
+              : renderLinkMenuItem(routes)}
           </Stack>
         </MenuList>
       </Box>

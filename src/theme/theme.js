@@ -76,6 +76,11 @@ export default function getTheme() {
           },
         },
       },
+      MuiSkeleton: {
+        defaultProps: {
+          animation: 'wave',
+        },
+      },
     },
     typography: {
       ...theme.typography,

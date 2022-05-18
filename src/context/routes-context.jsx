@@ -23,7 +23,7 @@ const getRoutes = (list) => {
 
   const getChildRoute = (item) => ({
     ...item,
-    path: `/${transformNameToPath(item.name)}`,
+    path: `/shipment/${transformNameToPath(item.name)}`,
   });
 
   return list.map(getChildRoute);

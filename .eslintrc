@@ -9,6 +9,10 @@
     "prettier/prettier",
     "plugin:prettier/recommended"
   ],
+  "plugins": [
+    "react",
+    "react-hooks"
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -16,10 +20,6 @@
     "ecmaVersion": 13,
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "react-hooks"
-  ],
   "rules": {
     "no-use-before-define":"off",
     "no-shadow":"off",

@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import { Link as RouterLink } from 'react-router-dom';
+import { Box, Typography, Link } from '@mui/material';
 
 export default function NoMatch() {
   return (
@@ -17,7 +16,9 @@ export default function NoMatch() {
         There is nothing here!
       </Typography>
       <Typography variant="h6">
-        <Link to="/">Go to the home page</Link>
+        <Link component={RouterLink} to="shipment/walmart" color="secondary">
+          Go to the first shipment item.
+        </Link>
       </Typography>
     </Box>
   );

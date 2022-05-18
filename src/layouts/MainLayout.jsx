@@ -37,7 +37,7 @@ export default function MainLayout() {
           >
             <Outlet />
             {/* We don't have the index route, so I've temporarily added this code */}
-            {location.pathname === '/' && <Navigate to="/walmart" replace />}
+            {location.pathname === '/' && <Navigate to="shipment/walmart" replace />}
           </Box>
         </Box>
       </Box>
