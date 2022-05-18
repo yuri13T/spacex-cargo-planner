@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Drawer from '@mui/material/Drawer';
-import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
-import MenuList from '@mui/material/MenuList';
-import MenuItem from '@mui/material/MenuItem';
-import Link from '@mui/material/Link';
+import {
+  Box,
+  Toolbar,
+  Drawer,
+  Typography,
+  Stack,
+  MenuList,
+  MenuItem,
+  Link,
+} from '@mui/material';
 import { useRoutesContext } from '../../context/routes-context';
 
 const drawerWidth = 336;

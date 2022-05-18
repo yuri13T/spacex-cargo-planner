@@ -4,8 +4,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import AutocompleteField from '../form-fields/AutocompleteField';
 import { ReactComponent as Logo } from '../../assets/icons/logo.svg';
+import { useRoutesContext } from '../../context/routes-context';
 
 export default function Header({ isDrawerOpen, onDrawerToggle }) {
+  const routes = useRoutesContext();
   return (
     <AppBar
       position="static"
@@ -58,9 +60,10 @@ export default function Header({ isDrawerOpen, onDrawerToggle }) {
               },
             }}
           >
-            <Fade in={!isDrawerOpen}>
-              <AutocompleteField />
-            </Fade>
+            <AutocompleteField options={routes} />
+            {/* <Fade in={!isDrawerOpen}> */}
+            {/*  <AutocompleteField options={routes} /> */}
+            {/* </Fade> */}
           </Grid>
           <Grid
             item

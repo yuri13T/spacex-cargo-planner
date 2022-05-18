@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Stack, Typography, TextField } from '@mui/material';
-import { useRoutesContext, getRoute } from '../../context/routes-context';
+// TODO: Find out info about this issue import/no-cycle and fix it.
+import { useRoutesContext, getRouteByPath } from '../../context/routes-context';
 
 const getCargoBays = (value) => {
   if (!value) {
@@ -23,7 +24,7 @@ export default function Shipment() {
   const routes = useRoutesContext();
 
   const selectedShipment = useMemo(
-    () => getRoute(routes, location.pathname),
+    () => getRouteByPath(routes, location.pathname),
     [routes, location.pathname]
   );
 

@@ -3,15 +3,20 @@ import { useRoutes, Navigate } from 'react-router-dom';
 import { createCtx } from './helpers';
 import { useShipmentsContext } from './shipments-context';
 import MainLayout from '../layouts/MainLayout';
-import Shipment from '../components/shipment';
+// TODO: Find out info about this issue import/no-cycle and fix it.
+import Shipment from '../components/shipment/Shipment';
 import NoMatch from '../components/common/NoMatch';
 
 const [useRoutesContext, RoutesContextProvider] = createCtx();
 
 export { useRoutesContext };
 
-export function getRoute(routes = [], path = '') {
+export function getRouteByPath(routes = [], path = '') {
   return routes.find((route) => route.path === path);
+}
+
+export function getRouteByName(routes = [], name = '') {
+  return routes.find((route) => route.name === name);
 }
 
 const getRoutes = (list) => {
@@ -66,8 +71,8 @@ export default function RoutesProvider() {
   const { /* loaded, error, */ data: shipments } = useShipmentsContext();
 
   const mainLayout = useMemo(() => getRoutes(shipments), [shipments]);
-  // For the context value, routes, delete the index route.
-  const routes = mainLayout[0]?.children.slice(1);
+  // For the context value, routes, delete the index route and the last NoMatch route.
+  const routes = mainLayout[0]?.children.slice(1, -1);
 
   const routeElements = useRoutes(mainLayout);
 

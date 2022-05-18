@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import Header from '../components/header';
-import AppDrawer from '../components/drawer';
+// TODO: Find out info about this issue import/no-cycle and fix it.
+import Header from '../components/header/Header';
+import AppDrawer from '../components/drawer/Drawer';
 
 export default function MainLayout() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
