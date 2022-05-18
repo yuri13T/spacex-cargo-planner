@@ -61,10 +61,25 @@ export default function Shipment() {
           <TextField value={cargoBoxesValue} onChange={handleCargoBoxesChange} />
         </div>
         <div>
-          <Typography variant="h4" color="secondary">
+          <Typography
+            variant="h4"
+            color="secondary"
+            sx={(theme) => ({
+              [theme.breakpoints.down('sm')]: {
+                textAlign: 'center',
+              },
+            })}
+          >
             Number of required cargo bays
           </Typography>
-          <Typography variant="h3">
+          <Typography
+            variant="h3"
+            sx={(theme) => ({
+              [theme.breakpoints.down('sm')]: {
+                textAlign: 'center',
+              },
+            })}
+          >
             {!loaded ? <Skeleton width="5%" /> : cargoBays}
           </Typography>
         </div>

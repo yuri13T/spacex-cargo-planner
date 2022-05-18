@@ -1,14 +1,12 @@
 import React from 'react';
-import { Box, AppBar, Toolbar, Grid, IconButton, Fade } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+import { Box, AppBar, Toolbar, Grid, IconButton, Link, Fade } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import AutocompleteField from '../form-fields/AutocompleteField';
 import { ReactComponent as Logo } from '../../assets/icons/logo.svg';
-import { useRoutesContext } from '../../context/routes-context';
 
-export default function Header({ isDrawerOpen, onDrawerToggle }) {
-  const { loaded, routes } = useRoutesContext();
-
+export default function Header({ loaded, routes, isDrawerOpen, onDrawerToggle }) {
   return (
     <AppBar
       position="static"
@@ -38,16 +36,18 @@ export default function Header({ isDrawerOpen, onDrawerToggle }) {
         >
           <Grid item>
             <Fade in>
-              <Box
-                component={Logo}
-                sx={{
-                  display: 'flex',
-                  '@media (max-width: 375px)': {
-                    width: '152px',
-                    height: '30px',
-                  },
-                }}
-              />
+              <Link component={RouterLink} to="shipment/walmart" underline="none">
+                <Box
+                  component={Logo}
+                  sx={{
+                    display: 'flex',
+                    '@media (max-width: 375px)': {
+                      width: '152px',
+                      height: '30px',
+                    },
+                  }}
+                />
+              </Link>
             </Fade>
           </Grid>
           <Grid
@@ -55,16 +55,16 @@ export default function Header({ isDrawerOpen, onDrawerToggle }) {
             xs={12}
             sm
             sx={{
-              display: isDrawerOpen ? 'none' : 'block',
+              '@media(min-width: 695px)': {
+                display: isDrawerOpen ? 'none' : 'block',
+              },
               '@media(max-width: 695px)': {
                 order: 3,
+                display: 'none',
               },
             }}
           >
-            <AutocompleteField loading={!loaded} options={routes} />
-            {/* <Fade in={!isDrawerOpen}> */}
-            {/*  <AutocompleteField loading={!loaded} options={routes} /> */}
-            {/* </Fade> */}
+            <AutocompleteField loading={loaded} options={routes} />
           </Grid>
           <Grid
             item

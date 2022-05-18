@@ -5,9 +5,13 @@ import { ErrorBoundary } from 'react-error-boundary';
 import Header from '../components/header/Header';
 import AppDrawer from '../components/drawer/Drawer';
 import ErrorFallback from '../components/common/ErrorFallback';
+import AutocompleteField from '../components/form-fields/AutocompleteField';
+import { useRoutesContext } from '../context/routes-context';
 
 export default function MainLayout() {
   const location = useLocation();
+
+  const { loaded, routes } = useRoutesContext();
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -18,13 +22,40 @@ export default function MainLayout() {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <Header isDrawerOpen={isDrawerOpen} onDrawerToggle={handleDrawerToggle} />
+        <Header
+          loaded={!loaded}
+          routes={routes}
+          isDrawerOpen={isDrawerOpen}
+          onDrawerToggle={handleDrawerToggle}
+        />
       </ErrorBoundary>
       <Box sx={{ display: 'flex', flexGrow: 1 }}>
         <ErrorBoundary FallbackComponent={ErrorFallback}>
-          <AppDrawer isDrawerOpen={isDrawerOpen} onDrawerToggle={handleDrawerToggle} />
+          <AppDrawer
+            loaded={!loaded}
+            routes={routes}
+            isDrawerOpen={isDrawerOpen}
+            onDrawerToggle={handleDrawerToggle}
+          />
         </ErrorBoundary>
-        <Box component="main" sx={{ flexGrow: 1, p: 3, pt: 0 }}>
+        <Box
+          component="main"
+          sx={{ flexGrow: 1, p: 3, pt: 0, display: 'flex', flexDirection: 'column' }}
+        >
+          <Box
+            sx={(theme) => ({
+              mb: 5,
+              display: 'none',
+              '@media(max-width: 695px)': {
+                display: 'block',
+              },
+              [theme.breakpoints.down('sm')]: {
+                mb: 3,
+              },
+            })}
+          >
+            <AutocompleteField loading={!loaded} options={routes} />
+          </Box>
           <Box
             sx={(theme) => ({
               background: theme.palette.background.main,

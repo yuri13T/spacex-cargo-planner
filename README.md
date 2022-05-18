@@ -24,6 +24,6 @@ To run the project:
 yarn start
 ```
 
-### In a week will update this test project, to also use the [TypeScript](https://www.typescriptlang.org/).
+### In a week will study TS, and update this test project, to use the [TypeScript](https://www.typescriptlang.org/).
 
 ### Happy viewing)

@@ -11,14 +11,11 @@ import {
   Link,
   Skeleton,
 } from '@mui/material';
-import { useRoutesContext } from '../../context/routes-context';
 
 const drawerWidth = 336;
 
-export default function AppDrawer({ isDrawerOpen, onDrawerToggle }) {
+export default function AppDrawer({ loaded, routes, isDrawerOpen, onDrawerToggle }) {
   const location = useLocation();
-
-  const { loaded, routes } = useRoutesContext();
 
   const renderLinkMenuItem = (list) =>
     list.map(({ id, name, path }) => (
@@ -27,7 +24,7 @@ export default function AppDrawer({ isDrawerOpen, onDrawerToggle }) {
         component={RouterLink}
         to={path}
         underline="none"
-        sx={{ pointerEvents: !loaded ? 'none' : 'auto' }}
+        sx={{ pointerEvents: loaded ? 'none' : 'auto' }}
       >
         <MenuItem
           selected={location.pathname === path}
@@ -49,7 +46,7 @@ export default function AppDrawer({ isDrawerOpen, onDrawerToggle }) {
           })}
         >
           <Typography color="secondary" sx={{ width: '100%' }}>
-            {!loaded ? <Skeleton /> : name}
+            {loaded ? <Skeleton /> : name}
           </Typography>
         </MenuItem>
       </Link>
@@ -92,7 +89,7 @@ export default function AppDrawer({ isDrawerOpen, onDrawerToggle }) {
         </Typography>
         <MenuList>
           <Stack spacing={1.25}>
-            {!loaded
+            {loaded
               ? renderLinkMenuItem(
                   Array.from(new Array(10), (v, i) => ({
                     id: i + 1,
