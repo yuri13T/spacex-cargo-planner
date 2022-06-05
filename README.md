@@ -24,4 +24,6 @@ To run the project:
 yarn start
 ```
 
+### You can tap [here](https://spacex-cargo-planner2.netlify.app) to view the project in action.
+
 ### Happy viewing)
