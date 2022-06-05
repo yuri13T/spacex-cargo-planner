@@ -1,10 +1,17 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, Theme } from '@mui/material/styles';
 import LatoWoff2 from '../assets/fonts/lato-v23-latin/lato-v23-latin-regular.woff2';
 import LatoWoff from '../assets/fonts/lato-v23-latin/lato-v23-latin-regular.woff';
 
+declare module '@mui/material/styles' {
+  interface TypeBackground {
+    main: string;
+    selected: string;
+  }
+}
+
 const theme = createTheme();
 
-export default function getTheme() {
+export default function getTheme(): Theme {
   const { white } = theme.palette.common;
 
   return {
@@ -115,21 +122,27 @@ export default function getTheme() {
     palette: {
       ...theme.palette,
       // mode: 'dark',
+      // TODO: Find out how to fix the below ts errors
+      // @ts-ignore
       background: {
         paper: '#1B1D22',
         main: 'linear-gradient(124.01deg, #2D3038 0%, rgba(45, 48, 56, 0) 100%)',
         selected: 'linear-gradient(90deg, rgba(45, 48, 56, 0) 22.92%, #2D3038 100%)',
       },
+      // @ts-ignore
       primary: {
         main: '#1B1D22',
       },
+      // @ts-ignore
       secondary: {
         main: '#979797',
       },
+      // @ts-ignore
       text: {
         primary: '#fff',
         // secondary: '#979797',
       },
+      // @ts-ignore
       action: {
         active: '#000',
       },

@@ -4,9 +4,17 @@ import { Box, AppBar, Toolbar, Grid, IconButton, Link, Fade } from '@mui/materia
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import AutocompleteField from '../form-fields/AutocompleteField';
+import { RouteType } from '../../context/routes-context';
 import { ReactComponent as Logo } from '../../assets/icons/logo.svg';
 
-export default function Header({ loaded, routes, isDrawerOpen, onDrawerToggle }) {
+type HeaderProps = {
+  loaded: boolean;
+  routes: RouteType[];
+  isDrawerOpen: boolean;
+  onDrawerToggle: () => void;
+}
+
+export default function Header({ loaded, routes, isDrawerOpen, onDrawerToggle }: HeaderProps) {
   return (
     <AppBar
       position="static"

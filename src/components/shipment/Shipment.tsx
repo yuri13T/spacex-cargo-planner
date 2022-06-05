@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { Stack, Typography, TextField, Skeleton } from '@mui/material';
 import { getRouteByPath, useRoutesContext } from '../../context/routes-context';
 
-const getCargoBays = (value) => {
+const getCargoBays = (value: string) => {
   if (!value) {
     return 0;
   }
@@ -30,7 +30,7 @@ export default function Shipment() {
   const [cargoBoxesValue, setCargoBoxesValue] = useState('');
   const [cargoBays, setCargoBays] = useState(0);
 
-  const handleCargoBoxesChange = ({ target: { value } }) => {
+  const handleCargoBoxesChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
     setCargoBoxesValue(value);
     setCargoBays(getCargoBays(value));
   };

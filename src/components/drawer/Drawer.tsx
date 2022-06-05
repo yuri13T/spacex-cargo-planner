@@ -11,13 +11,21 @@ import {
   Link,
   Skeleton,
 } from '@mui/material';
+import { RouteType } from '../../context/routes-context';
 
 const drawerWidth = 336;
 
-export default function AppDrawer({ loaded, routes, isDrawerOpen, onDrawerToggle }) {
+type AppDrawerProps = {
+  loaded: boolean;
+  routes: RouteType[];
+  isDrawerOpen: boolean;
+  onDrawerToggle: () => void;
+}
+
+export default function AppDrawer({ loaded, routes, isDrawerOpen, onDrawerToggle }: AppDrawerProps) {
   const location = useLocation();
 
-  const renderLinkMenuItem = (list) =>
+  const renderLinkMenuItem = (list: (RouteType & { id?: number })[]) =>
     list.map(({ id, name, path }) => (
       <Link
         key={id + name}
@@ -94,6 +102,7 @@ export default function AppDrawer({ loaded, routes, isDrawerOpen, onDrawerToggle
                   Array.from(new Array(10), (v, i) => ({
                     id: i + 1,
                     name: '',
+                    email: '',
                     path: '',
                   }))
                 )

@@ -15,7 +15,7 @@ import RoutesContainer from './containers/RoutesContainer';
 
 const theme = responsiveFontSizes(createTheme(getTheme()));
 
-function App() {
+function App(): JSX.Element {
   // console.log('theme', theme);
   return (
     <StyledEngineProvider injectFirst>

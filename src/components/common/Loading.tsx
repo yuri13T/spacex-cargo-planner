@@ -2,7 +2,14 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import { CircularProgress } from '@mui/material';
 
-function Loading({ height = '100%', size = 40 }) {
+type LoadingProps = { height?: string; size?: number } & typeof defaultProps;
+
+const defaultProps = {
+  height: '100%',
+  size: 40
+}
+
+function Loading({ height, size }: LoadingProps) {
   return (
     <Box
       sx={{
@@ -21,5 +28,7 @@ function Loading({ height = '100%', size = 40 }) {
     </Box>
   );
 }
+
+Loading.defaultProps = defaultProps;
 
 export default Loading;

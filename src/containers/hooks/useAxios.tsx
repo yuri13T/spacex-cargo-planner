@@ -1,9 +1,22 @@
 import { useState, useRef, useEffect } from 'react';
-import axios from 'axios';
+import axios, { Method, AxiosError } from 'axios';
 
-const useAxios = ({ url, method, payload, deps = [] }) => {
+type UseAxiosProps = {
+  url: string;
+  method?: Method;
+  payload?: Record<string, unknown>;
+}
+
+export type UseAxiosReturn<D> = {
+  loaded: boolean;
+  error: AxiosError | undefined;
+  data: D[] | null;
+  cancel: () => void;
+}
+
+const useAxios = <D,>({ url, method, payload }: UseAxiosProps): UseAxiosReturn<D> => {
   const [data, setData] = useState(null);
-  const [error, setError] = useState('');
+  const [error, setError] = useState<AxiosError>();
   const [loaded, setLoaded] = useState(false);
 
   const controllerRef = useRef(new AbortController());
@@ -24,13 +37,12 @@ const useAxios = ({ url, method, payload, deps = [] }) => {
 
         setData(response.data);
       } catch (error) {
-        setError(error);
+        setError(error as AxiosError);
       } finally {
         setLoaded(true);
       }
     })();
-    // eslint-disable-next-line
-  }, deps);
+  }, [method, payload, url]);
 
   return { loaded, error, data, cancel };
 };

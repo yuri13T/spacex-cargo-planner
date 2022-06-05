@@ -8,9 +8,14 @@ import {
   CircularProgress,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { getRouteByName } from '../../context/routes-context';
+import { getRouteByName, RouteType } from '../../context/routes-context';
 
-const AutocompleteField = React.forwardRef((props, ref) => {
+type AutocompleteFieldProps = {
+  loading: boolean;
+  options: RouteType[];
+}
+
+const AutocompleteField = React.forwardRef((props: AutocompleteFieldProps, ref) => {
   const { loading, options = [] } = props;
   const navigate = useNavigate();
 
@@ -23,7 +28,7 @@ const AutocompleteField = React.forwardRef((props, ref) => {
       getOptionLabel={(option) => option.name}
       onKeyDown={(event) => {
         if (event.key === 'Enter') {
-          const { value } = event.target;
+          const { value } = event.target as HTMLInputElement;
           const routeByName = getRouteByName(options, value);
           if (routeByName?.path) {
             navigate(routeByName.path);
@@ -32,6 +37,7 @@ const AutocompleteField = React.forwardRef((props, ref) => {
       }}
       renderOption={(props, option) => {
         return (
+          // @ts-ignore
           <Link
             /* eslint-disable-next-line react/jsx-props-no-spreading */
             {...props}
@@ -84,5 +90,7 @@ const AutocompleteField = React.forwardRef((props, ref) => {
     />
   );
 });
+
+AutocompleteField.displayName = 'AutocompleteField'
 
 export default AutocompleteField;
